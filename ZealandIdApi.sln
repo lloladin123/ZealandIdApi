@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZealandIdApi", "ZealandIdApi\ZealandIdApi.csproj", "{99784DB4-13B7-421F-88A2-22B4EC72F151}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D84ABFE5-CB40-4F75-9DFD-66C3FCC3642D}
+	EndGlobalSection
+EndGlobal
