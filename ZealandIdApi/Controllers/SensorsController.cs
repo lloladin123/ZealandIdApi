@@ -30,22 +30,6 @@ namespace ZealandIdApi.Controllers
                 _context.SaveChanges();
 
                 //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA1", 1) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA2", 2) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA3", 3) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA4", 4) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA5", 5) });
-
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB1", 6) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB2", 7) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB3", 8) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB4", 9) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB5", 10) });
-
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC1", 11) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC2", 12) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC3", 13) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC4", 14) });
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC5", 15) });
                 //_context.SaveChanges();
 
                 return Ok("Sensorer table reset successfully.");
@@ -120,6 +104,14 @@ namespace ZealandIdApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Sensor>> PostSensor(Sensor sensor)
         {
+          try
+            {
+                sensor.Validate();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(422, ex.Message);
+            }
           if (_context.Sensorer == null)
           {
               return Problem("Entity set 'ZealandIdDbContext.Sensorer'  is null.");
