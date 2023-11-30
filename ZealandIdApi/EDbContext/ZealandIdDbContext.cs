@@ -11,5 +11,6 @@ namespace ZealandIdApi.EDbContext
         }
 
         public DbSet<Sensor> Sensorer { get; set; }
+        public DbSet<Lokale> lokaler { get; set; }
     }
 }

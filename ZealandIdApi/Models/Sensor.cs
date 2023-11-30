@@ -6,9 +6,8 @@
         public string Navn { get; set; }
         public int LokaleId { get; set; }
 
-        public Sensor(int id, string navn, int lokaleId)
+        public Sensor(string navn, int lokaleId)
         {
-            Id = id;
             Navn = navn;
             LokaleId = lokaleId;
         }
@@ -16,6 +15,23 @@
         public Sensor()
         {
 
+        }
+
+        public void ValidateNavn()
+        {
+            if (Navn == null)
+            {
+                throw new ArgumentNullException("Navn må ikke være null");
+            }
+            if (Navn.Length < 5)
+            {
+                throw new ArgumentOutOfRangeException("Navn skal mindst være på 5 karakterer");
+            }
+        }
+
+        public void Validate()
+        {
+            ValidateNavn();
         }
 
         public override string ToString()

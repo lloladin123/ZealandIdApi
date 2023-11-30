@@ -21,6 +21,41 @@ namespace ZealandIdApi.Controllers
             _context = context;
         }
 
+        [HttpPost("resetTable")]
+        public IActionResult ResetSensorer()
+        {
+            try
+            {
+                _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Sensorer");
+                _context.SaveChanges();
+
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA1", 1) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA2", 2) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA3", 3) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA4", 4) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA5", 5) });
+
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB1", 6) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB2", 7) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB3", 8) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB4", 9) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZB5", 10) });
+
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC1", 11) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC2", 12) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC3", 13) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC4", 14) });
+                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZC5", 15) });
+                //_context.SaveChanges();
+
+                return Ok("Sensorer table reset successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error resetting Sensorer table: {ex.Message}");
+            }
+        }
+
         // GET: api/Sensors
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sensor>>> GetSensorer()
@@ -33,21 +68,20 @@ namespace ZealandIdApi.Controllers
         }
 
         // GET: api/Sensors/5
-        [HttpGet("{id}")]
+        [HttpGet("Id/{id}")]
         public async Task<ActionResult<Sensor>> GetSensor(int id)
         {
           if (_context.Sensorer == null)
           {
-              return NotFound();
+              return NotFound("DbContext can'be null");
           }
             var sensor = await _context.Sensorer.FindAsync(id);
 
             if (sensor == null)
             {
-                return NotFound();
+                return NotFound("No Such sensor exists");
             }
-
-            return sensor;
+            return Ok(sensor);
         }
 
         // PUT: api/Sensors/5
@@ -90,6 +124,12 @@ namespace ZealandIdApi.Controllers
           {
               return Problem("Entity set 'ZealandIdDbContext.Sensorer'  is null.");
           }
+            var relatedEntity = await _context.lokaler.FindAsync(sensor.LokaleId);
+
+            if(relatedEntity == null)
+            {
+                return StatusCode(422, "Invalid LokaleId");
+            }
             _context.Sensorer.Add(sensor);
             await _context.SaveChangesAsync();
 
