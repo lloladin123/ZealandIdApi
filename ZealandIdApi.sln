@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZealandIdApi", "ZealandIdApi\ZealandIdApi.csproj", "{99784DB4-13B7-421F-88A2-22B4EC72F151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZealandIdApi", "ZealandIdApi\ZealandIdApi.csproj", "{99784DB4-13B7-421F-88A2-22B4EC72F151}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZealandAPITest", "ZealandAPITest\ZealandAPITest.csproj", "{7A9C0407-5E99-434C-918F-044AA04F12DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99784DB4-13B7-421F-88A2-22B4EC72F151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9C0407-5E99-434C-918F-044AA04F12DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9C0407-5E99-434C-918F-044AA04F12DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9C0407-5E99-434C-918F-044AA04F12DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9C0407-5E99-434C-918F-044AA04F12DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
