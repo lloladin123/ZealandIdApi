@@ -4,12 +4,10 @@
     {
         public int Id { get; set; }
         public string Navn { get; set; }
-        public int LokaleId { get; set; }
 
-        public Sensor(string navn, int lokaleId)
+        public Sensor(string navn)
         {
             Navn = navn;
-            LokaleId = lokaleId;
         }
 
         public Sensor()
@@ -36,15 +34,14 @@
 
         public override string ToString()
         {
-            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Navn)}={Navn}, {nameof(LokaleId)}={LokaleId.ToString()}}}";
+            return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Navn)}={Navn}}}";
         }
 
         public override bool Equals(object? obj)
         {
             return obj is Sensor sensor &&
                    Id == sensor.Id &&
-                   Navn == sensor.Navn &&
-                   LokaleId == sensor.LokaleId;
+                   Navn == sensor.Navn;
         }
 
         public override int GetHashCode()

@@ -15,6 +15,16 @@
 
         }
 
+        public void ValidateNavn()
+        {
+
+        }
+
+        public void Validate()
+        {
+            ValidateNavn();
+        }
+
         public override string ToString()
         {
             return $"{{{nameof(Id)}={Id.ToString()}, {nameof(Navn)}={Navn}}}";

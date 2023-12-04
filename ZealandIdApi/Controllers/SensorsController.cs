@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ZealandIdApi.EDbContext;
 using ZealandIdApi.Models;
@@ -14,29 +15,44 @@ namespace ZealandIdApi.Controllers
     [ApiController]
     public class SensorsController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
         private readonly ZealandIdDbContext _context;
 
-        public SensorsController(ZealandIdDbContext context)
+        public SensorsController(ZealandIdDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
+        // BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK Udkommenter denne methode før release BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK BEMÆRK
         [HttpPost("resetTable")]
         public IActionResult ResetSensorer()
         {
-            try
-            {
-                _context.Database.ExecuteSqlRaw("TRUNCATE TABLE Sensorer");
-                _context.SaveChanges();
+            string defaultConnection = _configuration.GetConnectionString("DefaultConnection");
+            // Get the root path of the Web API application
+            string rootPath = Directory.GetCurrentDirectory();
+            
+            string scriptFilePath = $"{rootPath}/SqlScripts/ResetSensorer.sql"; // Replace with the path to your SQL script file
 
-                //_context.Sensorer.AddRange(new List<Sensor> { new Sensor("ZA1", 1) });
-                //_context.SaveChanges();
+            // Read the SQL script content from the file
+            string scriptContent = System.IO.File.ReadAllText(scriptFilePath);
 
-                return Ok("Sensorer table reset successfully.");
-            }
-            catch (Exception ex)
+            // Run the SQL script
+            ExecuteScript(defaultConnection, scriptContent);
+
+            return (Ok("Database reset"));
+        }
+
+        static void ExecuteScript(string connectionString, string scriptContent)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                return StatusCode(500, $"Error resetting Sensorer table: {ex.Message}");
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(scriptContent, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
@@ -46,7 +62,7 @@ namespace ZealandIdApi.Controllers
         {
           if (_context.Sensorer == null)
           {
-              return NotFound();
+              return NotFound("der er ingen sensorer");
           }
             return await _context.Sensorer.ToListAsync();
         }
@@ -116,12 +132,6 @@ namespace ZealandIdApi.Controllers
           {
               return Problem("Entity set 'ZealandIdDbContext.Sensorer'  is null.");
           }
-            var relatedEntity = await _context.lokaler.FindAsync(sensor.LokaleId);
-
-            if(relatedEntity == null)
-            {
-                return StatusCode(422, "Invalid LokaleId");
-            }
             _context.Sensorer.Add(sensor);
             await _context.SaveChangesAsync();
 
