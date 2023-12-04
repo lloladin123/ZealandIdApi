@@ -1,8 +1,8 @@
 ﻿USE [ZealandId];
 
 -- Delete all data from the table 'Sensors'
-DELETE FROM dbo.Lokaler;
+DELETE FROM dbo.Sensorer;
 
 -- Reset the identity seed for the table 'Sensors'
-DBCC CHECKIDENT ('Lokaler', RESEED, 0);
+DBCC CHECKIDENT ('Sensorer', RESEED, 0);
 

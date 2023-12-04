@@ -79,7 +79,7 @@ namespace ZealandIdApi.Controllers
 
             if (sensor == null)
             {
-                return NotFound("No Such sensor exists");
+                return NotFound("Der er ikke nogen sensor med det Id: " + id + "");
             }
             return Ok(sensor);
         }
@@ -104,7 +104,7 @@ namespace ZealandIdApi.Controllers
             {
                 if (!SensorExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Der er ikke nogen sensor med det Id:" + id + "");
                 }
                 else
                 {
@@ -149,7 +149,7 @@ namespace ZealandIdApi.Controllers
             var sensor = await _context.Sensorer.FindAsync(id);
             if (sensor == null)
             {
-                return NotFound();
+                return NotFound("Der er ikke nogen sensor med det Id: " + id + "");
             }
 
             _context.Sensorer.Remove(sensor);

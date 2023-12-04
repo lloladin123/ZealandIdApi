@@ -1,9 +1,12 @@
-﻿namespace ZealandIdApi.Models
+﻿using ZealandIdApi.EDbContext;
+
+namespace ZealandIdApi.Models
 {
     public class Sensor
     {
         public int Id { get; set; }
         public string Navn { get; set; }
+
 
         public Sensor(string navn)
         {

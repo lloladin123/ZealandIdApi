@@ -1,13 +1,18 @@
-﻿namespace ZealandIdApi.Models
+﻿using ZealandIdApi.EDbContext;
+
+namespace ZealandIdApi.Models
 {
     public class Lokale
     {
         public int Id { get; set; }
         public string Navn { get; set; }
 
-        public Lokale(string navn)
+
+        public int? SensorId { get; set; }
+        public Lokale(string navn, int sensorId)
         {
             Navn = navn;
+            SensorId = sensorId;
         }
 
         public Lokale()
@@ -17,7 +22,14 @@
 
         public void ValidateNavn()
         {
-
+            if (Navn == null)
+            {
+                throw new ArgumentNullException("Navn må ikke være null");
+            }
+            if (Navn.Length < 5)
+            {
+                throw new ArgumentOutOfRangeException("Navn skal mindst være på 5 karakterer");
+            }
         }
 
         public void Validate()
